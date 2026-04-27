@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AureaMed | Formación en Medicina Estética y Capilar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #050505;
+            --bg-surface: #121212;
+            --bg-surface-light: #1a1a1a;
+            --gold: #d4a373;
+            --gold-hover: #e6b981;
+            --text-main: #f4f4f4;
+            --text-muted: #999999;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
+        a { text-decoration: none; color: inherit; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        
+        /* Botones */
+        .btn {
+            display: inline-block; padding: 12px 28px; font-size: 13px; text-transform: uppercase; 
+            letter-spacing: 1.5px; border: 1px solid var(--gold); transition: all 0.3s ease; cursor: pointer;
+        }
+        .btn-gold { background: var(--gold); color: var(--bg-base); font-weight: 600; }
+        .btn-gold:hover { background: var(--gold-hover); border-color: var(--gold-hover); }
+        .btn-outline { background: transparent; color: var(--gold); }
+        .btn-outline:hover { background: var(--gold); color: var(--bg-base); }
+
+        /* Navbar */
+        header { border-bottom: 1px solid var(--border-color); background: rgba(5,5,5,0.95); position: sticky; top: 0; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 26px; letter-spacing: 2px; }
+        .logo span { color: var(--gold); font-style: italic; }
+        .nav-links { display: flex; gap: 30px; font-size: 14px; font-weight: 500; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero */
+        .hero { padding: 100px 0; background: linear-gradient(rgba(5,5,5,0.8), rgba(5,5,5,0.9)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80') center/cover; text-align: center; border-bottom: 1px solid var(--border-color); }
+        .badge { display: inline-block; background: #2a0808; border: 1px solid #ff4d4d; color: #ff4d4d; padding: 5px 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-radius: 50px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .hero p { color: var(--text-muted); max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; }
+
+        /* UCAM / Intro */
+        .intro { padding: 80px 0; background: var(--bg-surface); text-align: center; }
+        .intro h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--gold); }
+        .intro p { max-width: 900px; margin: 0 auto 40px; color: var(--text-muted); }
+        .ucam-banner { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 30px 0; display: flex; align-items: center; justify-content: center; gap: 20px; color: var(--text-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Oferta Académica (Dinámica Territorio Master) */
+        .oferta { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.8rem; margin-bottom: 15px; }
+        .section-header p { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 13px; }
+
+        .category-block { margin-bottom: 80px; }
+        .category-title { font-size: 1.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 30px; color: var(--text-main); display: flex; justify-content: space-between; align-items: flex-end; }
+        .category-title span { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        .grid-cursos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .curso-card { background: var(--bg-surface); border: 1px solid var(--border-color); padding: 40px 30px; transition: border 0.3s; }
+        .curso-card:hover { border-color: var(--gold); }
+        .curso-modalidad { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block; }
+        .curso-card h3 { font-size: 1.4rem; margin-bottom: 15px; line-height: 1.3; }
+        .curso-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; list-style: none; }
+        .curso-meta li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .curso-meta li::before { content: "•"; color: var(--gold); }
+
+        /* Por Qué Elegirnos */
+        .features { padding: 100px 0; background: var(--bg-surface-light); }
+        .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 50px; }
+        .feature-item h4 { font-family: 'Inter', sans-serif; color: var(--gold); font-size: 16px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; }
+        .feature-item p { font-size: 14px; color: var(--text-muted); }
+
+        /* Formulario Captación */
+        .contacto { padding: 100px 0; border-top: 1px solid var(--border-color); }
+        .form-wrapper { max-width: 800px; margin: 0 auto; background: var(--bg-surface); padding: 50px; border: 1px solid var(--border-color); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full { grid-column: span 2; }
+        label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        input, select { background: var(--bg-base); border: 1px solid var(--border-color); color: var(--text-main); padding: 15px; font-family: 'Inter', sans-serif; outline: none; }
+        input:focus, select:focus { border-color: var(--gold); }
+        
+        /* Clínicas y Footer */
+        .clinicas { padding: 60px 0; text-align: center; border-top: 1px solid var(--border-color); }
+        footer { background: var(--bg-surface); padding: 60px 0 20px; border-top: 1px solid var(--border-color); font-size: 13px; color: var(--text-muted); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: var(--text-main); font-family: 'Inter', sans-serif; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">AUREA<span>MED</span></div>
+            <nav class="nav-links">
+                <a href="#medicina">Medicina</a>
+                <a href="#enfermeria">Enfermería</a>
+                <a href="#auxiliar">Auxiliar</a>
+                <a href="#clinicas">Prácticas</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <a href="#contacto" class="btn btn-outline">Solicitar Info</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="badge">¡Últimas Plazas Abiertas!</span>
+            <h1>Máster Internacional en <br><span>Medicina Estética y Tricología</span></h1>
+            <p>Tu centro de excelencia para adquirir, ampliar y perfeccionar tus conocimientos con práctica real y el aval de la Universidad Católica de Murcia (UCAM).</p>
+            <a href="#oferta" class="btn btn-gold">Ver Oferta Académica</a>
+        </div>
+    </section>
+
+    <section class="intro">
+        <div class="container">
+            <h2>El estándar de oro en formación sanitaria</h2>
+            <p>AureaMed (anteriormente Territorio Master) se erige como la institución de élite para facultativos. Diseñamos nuestros programas con rigor científico absoluto para corregir inestetismos, dominar el anti-aging y perfeccionar el trasplante capilar bajo estrictas prácticas reales.</p>
+        </div>
+        <div class="ucam-banner">
+            <span>En calidad de Partner Oficial de</span>
+            <strong style="color: var(--text-main); font-size: 18px; font-family: 'Playfair Display', serif;">UCAM</strong>
+            <span>Universidad Católica San Antonio de Murcia</span>
+        </div>
+    </section>
+
+    <section class="oferta" id="oferta">
+        <div class="container">
+            <div class="section-header">
+                <p>Nuestros Programas</p>
+                <h2>Oferta Académica</h2>
+            </div>
+
+            <div class="category-block" id="medicina">
+                <div class="category-title">
+                    Medicina Estética y Capilar <span>Para Licenciados/Graduados en Medicina</span>
+                </div>
+                <div class="grid-cursos">
+                    <div class="curso-card">
+                        <span class="curso-modalidad">Semipresencial</span>
+                        <h3>Máster de Formación Permanente en Medicina Estética, Antienvejecimiento y Nutrición</h3>
+                        <ul class="curso-meta">
+                            <li>90 ECTS acreditados (UCAM)</li>
+                            <li>2.250 horas de formación</li>
+                            <li>Prácticas presenciales en clínica</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline">Saber más</a>
+                    </div>
+                    <div class="curso-card">
+                        <span class="curso-modalidad">Online</span>
+                        <h3>Máster de Formación Permanente en Medicina Estética</h3>
+                        <ul class="curso-meta">
+                            <li>60 ECTS acreditados (UCAM)</li>
+                            <li>1.500 horas de formación</li>
+                            <li>Metodología 100% digital</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline">Saber más</a>
+                    </div>
+                    <div class="curso-card">
+                        <span class="curso-modalidad">Semipresencial</span>
+                        <h3>Máster en Tricología y Cirugía de Trasplante Capilar</h3>
+                        <ul class="curso-meta">
+                            <li>90 ECTS acreditados (UCAM)</li>
+                            <li>Prácticas quirúrgicas reales</li>
+                            <li>Técnicas FUE y DHI avanzadas</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline">Saber más</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block" id="enfermeria">
+                <div class="category-title">
+                    Títulos de Posgrado en Enfermería <span>Para DUE o Graduados en Enfermería</span>
+                </div>
+                <div class="grid-cursos">
+                    <div class="curso-card">
+                        <span class="curso-modalidad">Semipresencial</span>
+                        <h3>Máster de Cirugía de Trasplante Capilar y Tricología en Enfermería</h3>
+                        <ul class="curso-meta">
+                            <li>60 ECTS acreditados (UCAM)</li>
+                            <li>1.500 horas formativas</li>
+                            <li>Prácticas presenciales</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline">Saber más</a>
+                    </div>
+                    <div class="curso-card">
+                        <span class="curso-modalidad">Online</span>
+                        <h3>Experto Universitario de Enfermería en Cirugía de Injerto Capilar</h3>
+                        <ul class="curso-meta">
+                            <li>29 ECTS acreditados (UCAM)</li>
+                            <li>725 horas formativas</li>
+                            <li>Especialización a tu ritmo</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline">Saber más</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-block" id="auxiliar">
+                <div class="category-title">
+                    Técnico Auxiliar de Enfermería <span>Para Técnicos Superiores en Salud</span>
+                </div>
+                <div class="grid-cursos">
+                    <div class="curso-card">
+                        <span class="curso-modalidad">Semipresencial / Online</span>
+                        <h3>Curso Superior de Técnicas Avanzadas en Implantes Capilares</h3>
+                        <ul class="curso-meta">
+                            <li>Hasta 36 ECTS acreditados</li>
+                            <li>Prácticas en quirófano capilar</li>
+                            <li>Inserción laboral directa</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-outline">Saber más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <p>El Valor de la Excelencia</p>
+                <h2>¿Por qué AureaMed?</h2>
+            </div>
+            <div class="grid-features">
+                <div class="feature-item">
+                    <h4>Garantía y Acreditación</h4>
+                    <p>Títulos acreditados (ECTS) y emitidos por una Universidad del Espacio Europeo de Educación Superior (UCAM).</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Práctica Real</h4>
+                    <p>Prácticas individuales "Hands-on" que aseguran el dominio clínico de nuestros alumnos en entornos reales.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Equipo Docente Élite</h4>
+                    <p>Claustro formado por Jefes de Servicio de prestigiosos hospitales y docentes de larga trayectoria investigadora.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Alta Empleabilidad</h4>
+                    <p>El 89% de nuestros exalumnos ejercen laboralmente la profesión para la que se formaron tras finalizar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="clinicas" id="clinicas">
+        <div class="container">
+            <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 12px; margin-bottom: 20px;">Red de Centros Asociados</p>
+            <h2 style="font-size: 2rem; margin-bottom: 20px;">Tus Prácticas en Clínicas de Prestigio</h2>
+            <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto;">Potencia tu aprendizaje rotando por nuestra red nacional: Clínica Londres, Clínica Le Med, Clínica Cariñanos, Centro Médico Azuaje, entre otras instalaciones médicas de primer nivel.</p>
+        </div>
+    </section>
+
+    <section class="contacto" id="contacto">
+        <div class="container">
+            <div class="section-header">
+                <p>Admisiones</p>
+                <h2>Solicita información sin compromiso</h2>
+            </div>
+            <div class="form-wrapper">
+                <form onsubmit="event.preventDefault(); alert('Solicitud enviada correctamente.');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre y Apellidos *</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono *</label>
+                            <input type="tel" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Perfil de Estudiante *</label>
+                            <select required>
+                                <option value="">Seleccionar...</option>
+                                <option>Grado Universitario (Medicina / Enfermería)</option>
+                                <option>Formación Profesional (Auxiliar)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <label>Programa de Interés *</label>
+                            <select required>
+                                <option value="">Selecciona el máster o curso...</option>
+                                <option>Máster M. Estética (Semipresencial)</option>
+                                <option>Máster M. Estética (Online)</option>
+                                <option>Máster Tricología y Capilar (Semipresencial)</option>
+                                <option>Posgrado Enfermería Capilar</option>
+                                <option>Curso Auxiliar Implantes Capilares</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gold" style="width: 100%; padding: 16px;">Enviar Solicitud al Comité</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 15px;">AUREA<span style="color: var(--gold); font-style: italic;">MED</span></h2>
+                    <p>Institución formativa sanitaria de alta especialización.</p>
+                    <p style="margin-top: 15px;">📍 C/ Torquemada 16, Madrid<br>📞 +34 656 438 139<br>✉️ info@aureamed.com</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Oferta Formativa</h4>
+                    <ul>
+                        <li><a href="#">Másteres en Medicina Estética</a></li>
+                        <li><a href="#">Másteres en Tricología</a></li>
+                        <li><a href="#">Posgrados para Enfermería</a></li>
+                        <li><a href="#">Cursos para Auxiliares</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>AureaMed</h4>
+                    <ul>
+                        <li><a href="#">Prácticas y Clínicas</a></li>
+                        <li><a href="#">Bolsa de Empleo</a></li>
+                        <li><a href="#">Blog y Noticias</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                <p>&copy; 2026 AureaMed (Territorio Master). Todos los derechos reservados. | <a href="#">Aviso legal</a> | <a href="#">Política de privacidad</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
